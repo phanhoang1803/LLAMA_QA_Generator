@@ -2,6 +2,7 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
+# from langchain.document_loaders import PyPDFLoader
 import pickle
 import models
 
@@ -10,7 +11,7 @@ def embed(courseID):
     # docs = loader.load_and_split()
 
     # Load data from directory
-    loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf")
+    loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf", loader_cls=PyPDFLoader)
     docs = loader.load()
 
     # Splitting data into chunks
