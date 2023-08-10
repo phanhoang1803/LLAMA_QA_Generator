@@ -13,7 +13,7 @@ class QA_Generator:
         llm = model.load_llm()
         
         # Load vectorstore that was stored in the disk
-        db = data.load_vectorstore(courseID)
+        db = data.embed_and_get_vectorstore(courseID=1)
 
         chain = ConversationalRetrievalChain.from_llm(llm, db.as_retriever(), return_source_documents=True)
         return chain
