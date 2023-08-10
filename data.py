@@ -34,7 +34,7 @@ def load_vectorstore(courseID):
     
 def embed_and_get_vectorstore(courseID):
     # Load data from directory
-    loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf")
+    loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf", loader_cls=PyPDFLoader)
     docs = loader.load()
     
     # Splitting data into chunks
@@ -42,6 +42,6 @@ def embed_and_get_vectorstore(courseID):
     all_splits = text_splitter.split_documents(docs)
     
     # Embedding
-    vectorstore = FAISS.from_documents(documents=all_splits, embedding=load_embeddings())
+    vectorstore = FAISS.from_documents(documents=all_splits, embedding=models.Embeddings.load_embeddings())
     
     return vectorstore
