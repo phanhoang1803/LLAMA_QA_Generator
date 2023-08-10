@@ -1,7 +1,8 @@
 import models
 from langchain.chains import ConversationalRetrievalChain
+import data
 
-class QA_Generator():
+class QA_Generator:
     def __init__(self, model_id, hf_auth):
         self.model_id = model_id
         self.hf_auth = hf_auth
