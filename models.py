@@ -1,3 +1,4 @@
+import torch
 from torch import cuda, bfloat16
 import transformers
 from transformers import StoppingCriteria, StoppingCriteriaList
@@ -5,7 +6,6 @@ from langchain.llms import HuggingFacePipeline
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS       
 from langchain.chains import ConversationalRetrievalChain
-import torch
 
 import data
 
