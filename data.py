@@ -35,9 +35,9 @@ def load_vectorstore(courseID):
 def embed_and_get_vectorstore(courseID, pdf_path = None):
     # Load data from directory
     if pdf_path == None:
-        loader = PyPDFLoader(file_path=pdf_path)
+        loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf")
     else:
-        loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf", loader_cls=PyPDFLoader)
+        loader = PyPDFLoader(file_path=pdf_path)
     docs = loader.load()
     
     # Splitting data into chunks
