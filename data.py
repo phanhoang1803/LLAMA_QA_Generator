@@ -3,11 +3,10 @@ from langchain.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 import pickle
-
 import models
 
 class DataProcessor:
-    def embed(courseID):
+    def embed(self, courseID):
         # loader = PyPDFLoader("/content/data/course1/VietAI_system_research.pdf")
         # docs = loader.load_and_split()
 
@@ -26,14 +25,14 @@ class DataProcessor:
         with open(f"vectorstores/course{str(courseID)}.pkl", "wb") as f:
             pickle.dump(vectorstore, f)
 
-    def load_vectorstore(courseID):
+    def load_vectorstore(self, courseID):
         # Load vectorstore from disk
         with open(f"vectorstores/course{str(courseID)}.pkl", "rb") as f:
             vectorstore = pickle.load(f)
 
         return vectorstore
     
-    def embed_and_get_vectorstore(courseID):
+    def embed_and_get_vectorstore(self, courseID):
         # Load data from directory
         loader = DirectoryLoader('data/course' + str(courseID), glob="**/*.pdf")
         docs = loader.load()
