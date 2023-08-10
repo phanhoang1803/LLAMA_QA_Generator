@@ -8,10 +8,6 @@ class QA_Generator:
         self.hf_auth = hf_auth
         
     def load_chain(self, llm, courseID):
-        # Load llm
-        model = models.LLAMAModel(self.model_id, self.hf_auth)
-        llm = model.load_llm()
-        
         # Load vectorstore that was stored in the disk
         db = data.embed_and_get_vectorstore(courseID=1)
 
