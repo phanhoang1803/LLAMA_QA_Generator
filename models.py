@@ -113,7 +113,7 @@ class LLAMAModel:
         llm = self.load_llm()
         
         # Load vectorstore that was stored in the disk
-        db = data.DataProcessor.load_vectorstore(courseID)
+        db = data.load_vectorstore(courseID)
 
         chain = ConversationalRetrievalChain.from_llm(llm, db.as_retriever(), return_source_documents=True)
         return chain
