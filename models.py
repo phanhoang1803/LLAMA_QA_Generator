@@ -5,7 +5,6 @@ from transformers import StoppingCriteria, StoppingCriteriaList
 from langchain.llms import HuggingFacePipeline
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS       
-from langchain.chains import ConversationalRetrievalChain
 
 import data
 
@@ -81,7 +80,7 @@ class LLAMAModel:
 
         return stopping_criteria
 
-    def load_llm(self):
+    def load_llm(self, temperature=0.5, max_new_tokens=512, repetition_penalty=1.1):
         model = self.load_model()
 
         tokenizer = transformers.AutoTokenizer.from_pretrained(
@@ -98,9 +97,9 @@ class LLAMAModel:
             task='text-generation',
             # we pass model parameters here too
             stopping_criteria=stopping_criteria,  # without this model rambles during chat
-            temperature=0.5,  # 'randomness' of outputs, 0.0 is the min and 1.0 the max
-            max_new_tokens=1024,  # max number of tokens to generate in the output
-            repetition_penalty=1.1  # without this output begins repeating
+            temperature=temperature,  # 'randomness' of outputs, 0.0 is the min and 1.0 the max
+            max_new_tokens=max_new_tokens,  # max number of tokens to generate in the output
+            repetition_penalty=repetition_penalty  # without this output begins repeating
         )
 
         llm = HuggingFacePipeline(pipeline=generate_text)
