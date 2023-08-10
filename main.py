@@ -12,14 +12,19 @@ hf_auth = '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'
 # chain = qa.load_chain(llm, 1)
 
 import data
-from QA_Generator import QA_Generator
+import QA_Generator 
 from langchain.llms import OpenAI
 
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
-qa = QA_Generator(model_id, hf_auth)
-chain = qa.load_chain(llm=OpenAI(), courseID=1, pdf_path="data\course1\VietAI_system_research.pdf")
+
+# from models import LLAMAModel
+
+# llama = LLAMAModel(model_id, hf_auth)
+# llm = llama.load_llm(temperature=0.5, max_new_tokens=1024)
+
+chain = QA_Generator.load_chain(llm=OpenAI(), courseID=1, pdf_path="data\course1\VietAI_system_research.pdf")
 
 chat_history = []
 

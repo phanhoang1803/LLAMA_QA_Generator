@@ -9,8 +9,6 @@ from langchain.vectorstores import FAISS
 import data
 
 class Embeddings:
-    # def __init__(self):
-        
     def load_embeddings():
         model_name = "sentence-transformers/all-mpnet-base-v2"
         model_kwargs = {"device": "cuda"}
