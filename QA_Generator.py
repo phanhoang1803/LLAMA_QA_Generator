@@ -7,9 +7,9 @@ class QA_Generator:
         self.model_id = model_id
         self.hf_auth = hf_auth
         
-    def load_chain(self, llm, courseID):
+    def load_chain(self, llm, courseID, pdf_path = None):    
         # Load vectorstore that was stored in the disk
-        db = data.embed_and_get_vectorstore(courseID=1)
+        db = data.embed_and_get_vectorstore(courseID=courseID, pdf_path=pdf_path)
 
         chain = ConversationalRetrievalChain.from_llm(llm, db.as_retriever(), return_source_documents=True)
         return chain
