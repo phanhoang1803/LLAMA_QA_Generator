@@ -48,3 +48,26 @@ def embed_and_get_vectorstore(courseID, pdf_path = None):
     vectorstore = FAISS.from_documents(documents=all_splits, embedding=models.Embeddings.load_embeddings())
     
     return vectorstore
+
+def save_to_json(markdown_text, path):
+    import re
+    import json
+    
+    # Extract JSON content from Markdown text
+    json_string = re.search(r'```json\n(.*?)```', markdown_text, re.DOTALL).group(1)
+    
+    # Add comma to separate each group
+    json_string = json_string.replace('}\n{', '},\n{')
+    
+    # Convert JSON string to Python list
+    python_list = json.loads(f'[{json_string}]')
+    
+    # Convert MCQ choices into lists
+    for i in python_list:
+        i['options'] = i['options'].split('\n')
+        
+    # Save as json
+    with open(path, 'w') as json_file:
+        json.dump(python_list, json_file, indent=2)
+        
+    print("Saved.") 
